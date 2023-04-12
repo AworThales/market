@@ -5,6 +5,8 @@
     background-color: #013914;
     color: #fff;
     transition: 0.25s all ease;
+    position: sticky;
+    top: 0;
 
     &.active{
         background-color: white;
