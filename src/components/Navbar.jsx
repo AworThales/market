@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import './navbar.scss';
+import { useState } from 'react';
 
 const Navbar = () => {
+  const [active, setActive] = useState(false);
+
+
   return (
-    <div className='navbar'>
+    <div className={active ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
          {/* <Link to="/"> */}
