@@ -1,14 +1,16 @@
 .navbar{
     display: flex;
-    justify-content: center;
+    align-items: center;
     background-color: #013914;
     color: #fff;
 
     .container{
-        width: 1400px;
+        width: 1401px;
         display: flex;
+        align-items: center;
         justify-content: space-between;
         padding: 21px 0px;
+        margin: 0px 100px;
 
         .logo{
             font-weight: bold;
