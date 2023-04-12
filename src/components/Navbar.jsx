@@ -17,6 +17,12 @@ useEffect (()=>{
   };
 }, []);
 
+const currentUser = {
+  id: 1,
+  username: "Thales Solo",
+  isSeller: true;
+}
+
   return (
     <div className={active ? "navbar active" : "navbar"}>
       <div className="container">
