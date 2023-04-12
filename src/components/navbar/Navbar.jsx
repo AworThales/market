@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './navbar.scss';
 import { useEffect, useState } from 'react';
-import users from "../assets/users.jpg";
+import users from "../../assets/users.jpg";
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
