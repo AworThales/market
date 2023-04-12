@@ -30,9 +30,9 @@ const currentUser = {
     <div className={active ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
-         {/* <Link to="/"> */}
+         <Link to="/">
          <span className='text'>Thales</span>
-         {/* </Link> */}
+         </Link>
           <span className='dot'>.</span>
         </div>
         <div className="links">
