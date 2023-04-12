@@ -5,6 +5,7 @@ import users from "../assets/users.jpg";
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false)
@@ -45,9 +46,12 @@ const currentUser = {
           {!currentUser && <button>Join</button> }
           {currentUser && (
             <div className="user">
-              <img src={users} alt="user" />
+              {/* setting condition if it true is going to be false and if is false is going to be true(opposite) */}
+              <img src={users} alt="user" onClick={() => setOpen(!open)} />
               <span>{currentUser?.username}</span>
-              <div className="option">
+              {open && //condition to check if open state is active the toggle the option
+
+                <div className="option">
                 {
                   // if current user is a seller show this option.
                   currentUser?.isSeller && (
@@ -55,12 +59,11 @@ const currentUser = {
                     <span>Gigs</span>
                     <span>Add new Gig</span>
                     </>
-                  )
-                }
+                  )}
                 <span>Orders</span>
                 <span>Messages</span>
                 <span>Logout</span>
-              </div>
+              </div>}
             </div>
           )}
           
