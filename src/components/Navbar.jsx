@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './navbar.scss';
 import { useEffect, useState } from 'react';
+import users from "../assets/users.jpg";
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
@@ -44,7 +45,7 @@ const currentUser = {
           {!currentUser && <button>Join</button> }
           {currentUser && (
             <div className="user">
-              <img src="" alt="user" />
+              <img src={users} alt="user" />
               <span>{currentUser?.username}</span>
               <div className="option">
                 {
