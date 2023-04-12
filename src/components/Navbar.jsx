@@ -20,10 +20,11 @@ useEffect (()=>{
 const currentUser = {
   id: 1,
   username: "Thales Solo",
-  isSeller: true;
+  isSeller: true
 }
 
   return (
+    // checking if the active useState is on the show the navbar active class otherwise just show the navbar class 
     <div className={active ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
@@ -37,10 +38,34 @@ const currentUser = {
           <span>Explore</span>
           <span>English</span>
           <span>Sign In</span>
-          <span>Become a Seller</span>
-          <button>Join</button>
+          {/* is not current user seller dont show this link */}
+          {!currentUser?.isSeller && <span>Become a Seller</span>}
+          {/* current user dont have to see this button */}
+          {!currentUser && <button>Join</button> }
+          {currentUser && (
+            <div className="user">
+              <img src="" alt="user" />
+              <span>{currentUser?.username}</span>
+              <div className="option">
+                {
+                  // if current user is a seller show this option.
+                  currentUser?.isSeller && (
+                    <>
+                    <span>Gigs</span>
+                    <span>Add new Gig</span>
+                    </>
+                  )
+                }
+                <span>Orders</span>
+                <span>Messages</span>
+                <span>Logout</span>
+              </div>
+            </div>
+          )}
+          
         </div>
       </div>
+      {/* if the there is active from useState then that is when hr and this menu has to show */}
         {active && (
           <>
           <hr />
