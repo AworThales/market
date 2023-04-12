@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './navbar.scss';
 
 const Navbar = () => {
@@ -5,7 +6,9 @@ const Navbar = () => {
     <div className='navbar'>
       <div className="container">
         <div className="logo">
-          <span className='text'>Thales</span>
+         {/* <Link to="/"> */}
+         <span className='text'>Thales</span>
+         {/* </Link> */}
           <span className='dot'>.</span>
         </div>
         <div className="links">
@@ -17,6 +20,11 @@ const Navbar = () => {
           <button>Join</button>
         </div>
       </div>
+        <hr />
+        <div className="menu">
+          <span>Test</span>
+          <span>Test2</span>
+        </div>
     </div>
   )
 }
