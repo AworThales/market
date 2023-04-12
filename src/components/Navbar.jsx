@@ -1,10 +1,21 @@
 import { Link } from 'react-router-dom';
 import './navbar.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
 
+  const isActive = () => {
+    window.scrollY > 0 ? setActive(true) : setActive(false)
+  }
+
+useEffect (()=>{
+  window.addEventListener("scroll", isActive);
+
+  return () => {
+    window.removeEventListener("scroll", isActive);
+  };
+}, []);
 
   return (
     <div className={active ? "navbar active" : "navbar"}>
@@ -24,11 +35,16 @@ const Navbar = () => {
           <button>Join</button>
         </div>
       </div>
-        <hr />
+        {active && (
+          <>
+          <hr />
         <div className="menu">
           <span>Test</span>
           <span>Test2</span>
         </div>
+          </>
+        )
+        }
     </div>
   )
 }
