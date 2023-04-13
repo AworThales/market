@@ -1,5 +1,5 @@
 import "./featured.scss";
-import man from "../../assets/man.jpg";
+import businessman from "../../assets/businessman.jpg";
 import searchicon from "../../assets/searchicon.png";
 
 
@@ -25,7 +25,7 @@ const Featured = () => {
                 </div>
             </div>
             <div className="right">
-                <img src={man} alt="" />
+                <img src={businessman} alt="" />
             </div>
         </div>
       
