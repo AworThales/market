@@ -1,0 +1,89 @@
+.featured{
+    height: 610px;
+    display: flex;
+    justify-content: center;
+    background-color: #013914;
+    color: #fff;
+
+    .container{
+        width: 1401px;
+        display: flex;
+        align-items: center;
+
+        .left{
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            width: 50%;
+
+            h1{
+                font-size: 42px;
+
+                i{
+                    font-weight: 300;
+                }
+            }
+
+            .search{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: #fff;
+                border-radius: 5px;
+
+                .searchInput{
+                    display: flex;
+                    align-items: center;
+                    gap: 11px;
+
+                    img{
+                        width: 20px;
+                        height: 20px;
+                        margin: 11px;
+                    }
+
+                    input{
+                        border: none;
+                        outline: none;
+                    }
+                }
+
+                button{
+                    width: 121px;
+                    height: 52px;
+                    border: none;
+                    background-color: #1dbf73;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+
+            .popular{
+                display: flex;
+                align-items: center;
+                gap: 11px;
+                span{}
+                button{
+                    font-size: 13px;
+                    padding: 5px 10px;
+                    border: 1px solid white;
+                    background-color: transparent;
+                    border-radius: 10px;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .right{
+            height: 100%;
+
+            img{
+                height: 80%;
+                object-fit: contain;
+                margin: 30px;
+                width: 90%;
+            }
+        }
+    }
+}
