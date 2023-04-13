@@ -8,6 +8,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const isActive = () => {
+    // if scroll Y is greater than zero, it mean we have scroll, then we setActive to true then if is not scroll setActive to be false
     window.scrollY > 0 ? setActive(true) : setActive(false)
   }
 
