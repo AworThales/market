@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './navbar.scss';
 import { useEffect, useState } from 'react';
 import users from "../../assets/users.jpg";
@@ -6,6 +6,9 @@ import users from "../../assets/users.jpg";
 const Navbar = () => {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+
+  // choosing our pathname using useLotion
+  const {pathname} = useLocation();
 
   const isActive = () => {
     // if scroll Y is greater than zero, it mean we have scroll, then we setActive to true then if is not scroll setActive to be false
@@ -27,8 +30,9 @@ const currentUser = {
 }
 
   return (
-    // checking if the active useState is on the show the navbar active class otherwise just show the navbar class 
-    <div className={active ? "navbar active" : "navbar"}>
+    // checking if the active useState is on the show the navbar active class otherwise just show the navbar class.
+    // using pathname, if it is not home page it navbar should be active
+    <div className={active || pathname !=="/" ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
          <Link to="/" className='link'>
@@ -71,7 +75,8 @@ const currentUser = {
         </div>
       </div>
       {/* if the there is active from useState then that is when hr and this menu has to show */}
-        {active && (
+      {/* and if it active pathname is not home page */}
+        {(active || pathname !=="/") && (
           <>
           <hr />
         <div className="menu">
