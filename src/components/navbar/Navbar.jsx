@@ -57,7 +57,7 @@ const currentUser = {
                   // if current user is a seller show this option.
                   currentUser?.isSeller && (
                     <>
-                    <Link className='link' to="/mygigs">Gigs</Link>
+                    <Link className='link' to="/myGigs">Gigs</Link>
                     <Link className='link' to="/add">Add new Gig</Link>
                     </>
                   )}
