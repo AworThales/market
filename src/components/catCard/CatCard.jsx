@@ -6,8 +6,8 @@ const CatCard = (item) => {
     <Link to="/gigs?cat=design">
         <div className="catCard">
             <img src={item.img} alt="" />
-            <span className="desc">{item.desc}</span>
-            <span className="title">{item.title}</span>
+            <span className="desc">{item.desc}Description Here</span>
+            <span className="title">{item.title}Title Here</span>
         </div>
     </Link>
   )
