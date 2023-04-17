@@ -5,6 +5,9 @@
     cursor: pointer;
     overflow: hidden;
     border: 1px solid rgb(225, 225, 225);
+    &:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
 
     img{
         width: 100%;
@@ -26,12 +29,12 @@
         }
         .text{
             h2{
-                font-size: 13px;
+                font-size: 11px;
                 font-weight: 500;
             }
             span{
-                font-size: 13px;
-                font-weight: 500;
+                font-size: 11px;
+                font-weight: 300;
             }
         }
     }
