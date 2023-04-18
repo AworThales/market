@@ -3,6 +3,10 @@
     height: 380px;
     border: 1px solid rgb(228, 228, 228);
     margin-bottom: 36px;
+
+    &:hover{
+        border: 1px solid rgb(118, 116, 116);
+    }
   
     img {
       width: 100%;
