@@ -90,6 +90,8 @@ const currentUser = {
           <Link className='link' to="/">Business</Link>
           <Link className='link' to="/">Lifestyle</Link>
         </div>
+
+        <hr />
           </>
         )
         }
