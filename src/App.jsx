@@ -7,7 +7,7 @@ import Add from "./pages/add/Add";
 import Orders from "./pages/orders/Orders";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
-import myGigs from "./pages/mygigs/myGigs";
+import MyGigs from "./pages/mygigs/myGigs";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -51,10 +51,6 @@ function App() {
           element: <Orders />
         },
         {
-          path: "/mygigs",
-          element: <myGigs />
-        },
-        {
           path: "/add",
           element: <Add />
         },
@@ -68,7 +64,7 @@ function App() {
         },
         {
           path: "/mygigs",
-          element: <myGigs />
+          element: <MyGigs />
         },
       ]
     },
