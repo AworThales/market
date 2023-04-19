@@ -212,28 +212,43 @@ const Gig = () => {
           </div>
         </div>
         <div className="right">
-        <div className="stars">
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <span>5</span>
-                </div>
-                <h2>About This Gig</h2>
+          <div className="price">
+            <h3>1 AI generated image</h3>
+            <h2>$ 60.85</h2>
+          </div>
           <p>
-            i use an AI program to create images based on text prompts. This
-            means i can help you to create a vision you have through a textual
-            description of your scene without requiring any reference images.
-            Some things I've found it often excels at are: Character portraits
-            (E.g. a picture to go with your DnD charactr) Landscapes (E.g. team,
-            business, profile picture). You can be as vague or as descriptive as
-            you want. Being more vague will allow the AI to be more creative which
-            can sometimes result in some amazing images. You can also be credibly 
-            precise if you have a clear image of what you want in mind. All of the 
-            images i can create are original and will be found nowhere else. If you
-            have any questions you're more than welcome to send me a message.
+            I will create a unique high AI generated image based
+            on a description that you give me.
           </p>
+          <div className="details">
+            <div className="item">
+              <img src="/img/clock.png" alt="" />
+              <span>2 days Delivery</span>
+            </div>
+            <div className="item">
+              <img src="/img/recycle.png" alt="" />
+              <span>4 Revisions</span>
+            </div>
+          </div>
+          <div className="features">
+            <div className="item">
+              <img src="/img/greencheck.png" alt="" />
+              <span>Promt writing</span>
+            </div>
+            <div className="item">
+              <img src="/img/greencheck.png" alt="" />
+              <span>Promt writing</span>
+            </div>
+            <div className="item">
+              <img src="/img/greencheck.png" alt="" />
+              <span>Promt writing</span>
+            </div>
+            <div className="item">
+              <img src="/img/greencheck.png" alt="" />
+              <span>Promt writing</span>
+            </div>
+          </div>
+          <button>Continue</button>
         </div>
       </div>
     </div>
