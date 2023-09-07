@@ -13,6 +13,7 @@ import authRoute from "./routes/auth.route.js";
 const app = express();
 dotenv.config();
 
+
 const connect = async ()=>{
     try {
         await mongoose.connect(process.env.MONDB);
@@ -21,6 +22,8 @@ const connect = async ()=>{
         console.log(error);
     }
 };
+
+app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
