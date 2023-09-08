@@ -14,6 +14,8 @@ import {
   Outlet
 } from "react-router-dom";
 import "./App.scss";
+import Register from "./pages/register/Rigister";
+import Login from "./pages/login/Login";
 
 
 
@@ -65,6 +67,14 @@ function App() {
         {
           path: "/mygigs",
           element: <MyGigs />
+        },
+        {
+          path: "/login",
+          element: <Login/>
+        },
+        {
+          path: "/register",
+          element: <Register />
         },
       ]
     },
