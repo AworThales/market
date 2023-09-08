@@ -10,7 +10,7 @@ export const deleteUser = async (req, res, next) =>{
         };
         await userModel.findByIdAndDelete(req.params.id);
         return res.status(200).send("User deleted successfully!")
-    } catch (error) {
-        console.log(error)
+    } catch (err) {
+        next(err);
     }
 };
