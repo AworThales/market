@@ -16,17 +16,25 @@ import {
 import "./App.scss";
 import Register from "./pages/register/Rigister";
 import Login from "./pages/login/Login";
-
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
 
 
 function App() {
 
+  const queryClient = new QueryClient();
+
   const Layout = () => {
     return (
      <div className="app">
+      <QueryClientProvider client={queryClient}>
         <Navbar />
         <Outlet />
         <Footer />
+      </QueryClientProvider>
      </div>
     );
   };
@@ -83,8 +91,6 @@ function App() {
   return (
     <div className="main">
       <RouterProvider router={router} />
-      
-      
     </div>
     
   )
