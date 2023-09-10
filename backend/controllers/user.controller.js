@@ -13,4 +13,13 @@ export const deleteUser = async (req, res, next) =>{
     } catch (err) {
         next(err);
     }
-}
+};
+
+export const getUser = async (req, res, next) =>{
+    try {
+        const user = await userModel.findById(req.params.id);
+        return res.status(200).send(user);
+    } catch (err) {
+        next(err);
+    }
+};
