@@ -53,7 +53,7 @@ export const getGigs = async (req, res, next) =>{
     };
    
     try {
-        const gigs = await GigModel.find(filters);
+        const gigs = await GigModel.find(filters).sort({ [q.sort]: -1});
         if(!gigs)  return next(createError(403, "Gig Doesn't exist!"));
         res.status(200).send(gigs);
     } catch (err) {
