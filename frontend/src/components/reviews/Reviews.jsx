@@ -10,7 +10,8 @@ export const Reviews = ({gigId}) => {
     const { isLoading, error, data } = useQuery({
       queryKey: ["reviews"],
       queryFn: () =>
-        newRequest.get(`/reviews/${gigId}`).then((res) => {
+        newRequest.get(`/reviews/${gigId}`)
+        .then((res) => {
           return res.data;
         }),
     });

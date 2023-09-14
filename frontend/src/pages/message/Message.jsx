@@ -1,97 +1,73 @@
-import { Link } from 'react-router-dom';
-import './message.scss';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
+import newRequest from "../../utils/newRequest";
+import "./message.scss";
 
 const Message = () => {
+  const { id } = useParams();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const queryClient = useQueryClient();
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["messages"],
+    queryFn: () =>
+      newRequest.get(`/messages/${id}`)
+      .then((res) => {
+        return res.data;
+      }),
+  });
+
+  const mutation = useMutation({
+    mutationFn: (message) => {
+      return newRequest.post(`/messages`, message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["messages"]);
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutation.mutate({
+      conversationId: id,
+      desc: e.target[0].value,
+    });
+    e.target[0].value = "";
+  };
+
   return (
-    <div className='message'> 
+    <div className="message">
       <div className="container">
         <span className="breadcrumbs">
-          <Link to="/messages" className='link'>MESSAGES</Link> <b> > THALES SOLO > </b>
+          <Link to="/messages">Messages</Link> > {currentUser.username} >
         </span>
-        <div className="messages">
-          <div className="item">
-            <img src="https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-              Lorem ipsum dolor sit amet consectetur.
-            </p>
+        {isLoading ? (
+          "loading"
+        ) : error ? (
+          "error"
+        ) : (
+          <div className="messages">
+            {data.map((msg) => (
+              <div className={msg.userId === currentUser._id ? "owner item" : "item"} key={msg._id}>
+                <img
+                  src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt=""
+                />
+                <p>{msg.desc}</p>
+              </div>
+            ))}
           </div>
-          <div className="item owner">
-            <img src="https://images.pexels.com/photos/4371669/pexels-photo-4371669.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-              Lorem ipsum dolor sit amet consectetur.
-            </p>
-          </div>
-          <div className="item">
-            <img src="https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-              Lorem ipsum dolor sit amet consectetur.
-            </p>
-          </div>
-          <div className="item owner">
-            <img src="https://images.pexels.com/photos/4371669/pexels-photo-4371669.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-              Lorem ipsum dolor sit amet consectetur.
-            </p>
-          </div>
-          <div className="item">
-            <img src="https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-              Lorem ipsum dolor sit amet consectetur.
-            </p>
-          </div>
-          <div className="item owner">
-            <img src="https://images.pexels.com/photos/4371669/pexels-photo-4371669.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-              Lorem ipsum dolor sit amet consectetur.
-            </p>
-          </div>
-          <div className="item">
-            <img src="https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-              Lorem ipsum dolor sit amet consectetur.
-            </p>
-          </div>
-          <div className="item owner">
-            <img src="https://images.pexels.com/photos/4371669/pexels-photo-4371669.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-              Lorem ipsum dolor sit amet consectetur.
-            </p>
-          </div>
-        </div>
-
+        )}
         <hr />
-
-        <div className="write">
-          <textarea name="" placeholder='Write a message...' id="" cols="30" rows="10"></textarea>
-          <button>Send</button>
-        </div>
+        <form className="write" onSubmit={handleSubmit}>
+          <textarea type="text" placeholder="write a message" />
+          <button type="submit">Send</button>
+        </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Message
+export default Message;
