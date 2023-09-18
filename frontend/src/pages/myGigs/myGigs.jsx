@@ -1,81 +1,76 @@
 import { Link } from "react-router-dom";
 import "./myGigs.scss";
+import currentUser from "../../utils/getCurrentUser"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import newRequest from "../../utils/newRequest";
 
 const MyGigs = () => {
+  const queryClient = useQueryClient();
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["myGigs"],
+    queryFn: () =>
+      newRequest.get(`/gigs?${currentUser.id}`)
+      .then((res) => {
+        return res.data;
+      }),
+  });
+
+  const mutation = useMutation({
+    mutationFn: (id) => {
+      return newRequest.delete(`/gigs/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myGigs"]);
+    },
+  });
+
+  const handleDelete = async (id)=>{
+    mutation.mutate(id);
+  };
+  
   return (
     <div className="myGigs">
+    {isLoading ? (
+          "loading"
+        ) : error ? (
+          "error"
+        ) : (
       <div className="container">
         <div className="title">
           <h1>Gigs</h1>
+          {currentUser.isSeller && (
           <Link to="/add">
             <button>Add New Gig</button>
           </Link>
+          )}
         </div>
         <table>
-          <tr>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Sales</th>
-            <th>Action</th>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.pexels.com/photos/11295165/pexels-photo-11295165.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>100</td>
-            <td>150</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.pexels.com/photos/11295165/pexels-photo-11295165.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>100</td>
-            <td>150</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.pexels.com/photos/11295165/pexels-photo-11295165.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>100</td>
-            <td>150</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.pexels.com/photos/11295165/pexels-photo-11295165.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>100</td>
-            <td>150</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.pexels.com/photos/11295165/pexels-photo-11295165.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>100</td>
-            <td>150</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>Image</td>
+              <td>Title</td>
+              <td>Price</td>
+              <td>Sales</td>
+              <td>Action</td>
+            </tr>
+          </tbody>
+          <tfoot>
+          {data.map((gig)=>(
+            <tr key={gig._id}>
+              <td>
+                <img className="img" src={gig.coverImg} alt="" />
+              </td>
+              <td>{gig.title}</td>
+              <td>{gig.price}</td>
+              <td>{gig.sales}</td>
+              <td>
+                <img onClick={()=>handleDelete(gig._id)} className="delete" src="/img/delete.png" alt="" />
+              </td>
+          </tr>))}
+          </tfoot>
         </table>
-      </div>
+      </div> )}
       
     </div>
   )
