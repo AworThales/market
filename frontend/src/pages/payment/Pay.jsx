@@ -1,46 +1,48 @@
-import "./pay.scss"
+import React, { useEffect, useState } from "react";
+import "./Pay.scss";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { useEffect, useState } from "react";
 import newRequest from "../../utils/newRequest";
-import {useParams} from "react-router-dom";
-import { CheckoutForm } from "../../components/checkoutForm/CheckoutForm";
+import { useParams } from "react-router-dom";
+import CheckoutForm from "../../components/checkoutForm/CheckoutForm";
 
 const stripePromise = loadStripe("pk_test_51NqbSeJMgINfUakQ7waYbK8viUwzivH9ZyCKN7LXk4CCgLuPzssP4A9aXhqLDJbTnDhmyYtEhLwy4N9n8uprOsBx00wQiL9BWf");
 
-export const Pay = () => {
-    const {id} = useParams()
-    const [clientSecret, setClientSecret] = useState("");
 
+const Pay = () => {
+  const [clientSecret, setClientSecret] = useState("");
 
-    useEffect(()=>{
-        const makeRequest = async () =>{
-            try {
-                const res = newRequest.post(`/orders/create-payment-intent/${id}`)
-                setClientSecret(res.data.clientSecret);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        makeRequest();
-    }, []);
+  const { id } = useParams();
 
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await newRequest.post(
+          `/orders/create-payment-intent/${id}`
+        );
+        setClientSecret(res.data.clientSecret);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    makeRequest();
+  }, []);
 
-    const appearance = {
-        theme: 'stripe',
-      };
-      const options = {
-        clientSecret,
-        appearance,
-      };
+  const appearance = {
+    theme: 'stripe',
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
 
-  return (
-    <div className="pay">
-        {clientSecret && (
+  return <div className="pay">
+    {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
       )}
-    </div>
-  )
-}
+  </div>;
+};
+
+export default Pay;
